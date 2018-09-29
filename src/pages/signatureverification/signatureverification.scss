@@ -1,0 +1,38 @@
+page-signatureverification{
+  .toolbar-title {
+   
+    overflow: visible;
+  }
+  .toolbar-title-ios {
+    margin-left: -50px;
+  }
+  }
+    signature-pad {
+      canvas {
+        border: 2px solid #90CAF9;
+        width: 100%; height: 70%;
+        background-color: #E3F2FD;
+      }
+    }
+
+    .alert-md .alert-title {
+      font-size: 20px;
+  }
+
+.alert-title {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+
+}
+
+.alert-md .alert-message {
+  max-height: 240px;
+  font-size: 15px;
+  text-align: center;
+  color: #616161;
+}
+
+.alert-md .alert-wrapper {
+  border: 2px solid #03A9F4;
+}

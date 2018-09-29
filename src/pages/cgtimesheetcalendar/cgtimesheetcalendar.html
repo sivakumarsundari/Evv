@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary" style="padding: 0">
+    <ion-grid>
+      <ion-row align-items-center>
+        <!-- <ion-col col-2 style="padding: 0">
+          <button ion-button clear>
+            <ion-icon name="person" style="font-size: 30px;color: white" (click)="test()">
+              <ion-badge id="notifications-badge" color="danger">3</ion-badge>
+            </ion-icon>
+          </button>
+        </ion-col> -->
+        <ion-col  col-10>
+          <ion-title style="padding-left:20%">Timesheets</ion-title>
+        </ion-col>
+        <ion-col col-2 >
+          <button ion-button clear style="float: right" (click)="presentPopover($event)">
+              <ion-icon name="menu" style="color: white;font-size: 25px;padding-right: 8px"></ion-icon>
+            </button>
+        <!-- <ion-icon name="menu" style="font-size: 30px;color: white;float: right;" (click)="carehistory()"></ion-icon> -->
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content text-center>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-icon name="card" style="float: right;font-size: 30px;" color="primary" (click)="blockcal()"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div *ngIf="calendarOptions"  >
+    <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+    (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+  </div>
+</ion-content>

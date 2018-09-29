@@ -1,0 +1,66 @@
+<ion-header text-center>
+  <ion-navbar color="primary" style="padding: 0" hideBackButton="true">
+    
+        <ion-buttons left>
+            <button  ion-button icon-only (click)="viewCtrl.dismiss()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+   
+        <ion-title style="padding-right:10%">Care History</ion-title>
+      <!-- </ion-col>
+      <ion-col></ion-col> -->
+    
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content style="background-color: #F5F5F5;">
+
+  <ion-list text-wrap *ngFor="let mn of monthlist" style="padding: 2px;padding-top: 5%;">
+
+    <ion-item (click)="error(mn)" style="border:1px solid #607D8B;padding: 6px;">
+      <ion-label style="font-size:17px;margin: 0">
+        <ion-row align-items-center>
+          <!-- <div class="circle" style="margin-right: 5px">
+                  <div class="letter">{{mn.monthName}}</div>
+                </div> -->
+          <b>{{mn.monthName}} {{ mn.year}}</b>
+          <ion-badge id="missing" class="test" color="danger" *ngIf="mn.isMissingTimeSheet">!</ion-badge>
+        </ion-row>
+      </ion-label>
+      <ion-label style="color: gray;font-size:17px;margin: 0" text-right>{{mn.dayList.length}} Timesheets
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-label>
+    </ion-item>
+
+    <!-- <ion-item>
+      <ion-label>March</ion-label>
+      <ion-label style="color: gray;" text-right>9 Timesheets
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-label>>
+    </ion-item>
+    <ion-item>
+      <ion-label>February</ion-label>
+      <ion-label style="color: gray;" text-right>8 Timesheets
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-label>>
+    </ion-item>
+    <ion-item>
+      <ion-label>January</ion-label>
+      <ion-label style="color: gray;" text-right>9 Timesheets
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-label>>
+    </ion-item>
+    <ion-item>
+      <ion-label>December 2017</ion-label>
+      <ion-label style="color: gray;" text-right>5 Timesheets
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-label>>
+    </ion-item> -->
+  </ion-list>
+  <div class="alert" *ngIf="monthlist.length==0">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>No Care History is available!</strong>
+  </div>
+</ion-content>

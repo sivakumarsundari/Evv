@@ -1,0 +1,204 @@
+<!--
+  Generated template for the ReprofilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col>
+            <ion-icon name="arrow-back" style="color: white;font-size: 20px;float: left;" (click)="back()" large></ion-icon>
+        </ion-col>
+        <ion-col style="position: unset;">
+          <ion-title text-center>Profile</ion-title>
+        </ion-col>
+        <ion-col>
+          
+          <ion-icon name="create" style="color: white;font-size: 20px;float: right;" (click)="edit()"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div *ngIf="editt==false">
+    <!-- <ion-grid>
+      <ion-row text-center style="padding-top:3%">
+        <ion-col text-center>
+          <img class="img" src="assets/imgs/man.png" *ngIf="cliprodet.isMale==true;">
+          <img class="img" src="assets/imgs/female.png" *ngIf="!cliprodet.isMale==true;"> -->
+          <!-- <img class="img" src={{cliprodet.clientPhoto}}> -->
+        <!-- </ion-col>
+      </ion-row>
+    </ion-grid> -->
+    <ion-grid text-center>
+      <ion-row align-items-center>
+        <ion-col text-center style="margin-left: 40px">
+          <img class="img" src="assets/imgs/man.png" *ngIf="!global.galleryPhoto && cliprodet.isMale==true;">
+          <img class="img" src="assets/imgs/female.png" *ngIf="!global.galleryPhoto && !cliprodet.isMale==true;">
+          <img class="img" [src]="global.galleryPhoto" *ngIf="global.galleryPhoto" />
+          <ion-badge id="badge_camera" (click)="openCamera(global.galleryPhoto)">
+            <ion-icon name="camera" style="font-size: 16px">
+            </ion-icon>
+          </ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+
+    <h5 style="margin: 10px" text-center>{{cliprodet.firstName|uppercase}} {{cliprodet.middleName|uppercase}} {{cliprodet.lastName|uppercase}}</h5>
+    <!-- <p text-center>
+    <b>Caring Needed: {{i.care}}</b>
+  </p> -->
+
+    <ion-row text-center align-items-center>
+      <ion-col col-2>
+        <ion-icon name="pin" style="color: gray;font-size:  20px;margin-left: 5%;margin-top:-5px;"></ion-icon>
+      </ion-col>
+      <ion-col col-10 text-wrap>
+        <ion-label style="text-align: left;font-weight: 500">{{cliprodet.street1}} {{cliprodet.street2}} , {{cliprodet.city}}, {{cliprodet.state}}, {{cliprodet.zipcode}}</ion-label>
+      </ion-col>
+      
+    </ion-row>
+    <div *ngIf="cliprodet.empmapimage!=null">
+      <!-- <img class="img" [src]="reviewdetail.outTimeMap"> -->
+      <img [src]="_DomSanitizer.bypassSecurityTrustUrl(cliprodet.empmapimage)" style=" display: block;
+                  width: 100%;
+                  height: 120px;">
+    </div>
+
+
+    <ion-row text-center align-items-center>
+      <ion-col col-2>
+        <ion-icon name="ios-call" style="color: gray;font-size:  20px;margin-left: 5%;margin-top: 5px;"></ion-icon>
+      </ion-col>
+      <ion-col col-10 text-wrap>
+        <ion-label style="text-align: left;font-weight: 500">
+            <a href="tel:{{cliprodet.mobileNo}}">{{cliprodet.mobileNo}}</a></ion-label>
+      </ion-col>
+    </ion-row>
+
+
+
+    <ion-row text-center align-items-center>
+      <ion-col col-2>
+        <ion-icon name="mail" style="color: gray;font-size:  20px;margin-left: 5%;margin-top: 5px;"></ion-icon>
+      </ion-col>
+      <ion-col col-10 text-wrap>
+        <ion-label style="text-align: left;font-weight: 500">
+            <a href="mailto:{{cliprodet.emailId}}">{{cliprodet.emailId}}</a></ion-label>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-item>
+      <ion-icon name="football" item-start large></ion-icon>
+      <p style="text-align: justify;">{{cliprodet.street1}} {{cliprodet.street2}} , {{cliprodet.city}}, {{cliprodet.state}}, {{cliprodet.zipcode}}</p>
+    </ion-item>  -->
+
+  </div>
+  <div *ngIf="editt==true">
+
+    <!-- <ion-grid text-center>
+      <ion-row align-items-center>
+        <ion-col text-center style="margin-left: 40px">
+          <img class="img" src="assets/imgs/man.png" *ngIf="!global.galleryPhoto">
+          <img class="img" [src]="global.galleryPhoto" *ngIf="global.galleryPhoto" />
+          <ion-badge id="badge_camera" (click)="openCamera()">
+            <ion-icon name="camera" style="font-size: 16px">
+            </ion-icon>
+          </ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid> -->
+    <!-- <ion-grid text-center>
+      <ion-row align-items-center>
+        <ion-col text-center style="margin-left: 40px">
+          <img class="img" src="assets/imgs/man.png" *ngIf="!global.galleryPhoto && cliprodet.isMale==true;">
+          <img class="img" src="assets/imgs/female.png" *ngIf="!global.galleryPhoto && !cliprodet.isMale==true;">
+          <img class="img" [src]="global.galleryPhoto" *ngIf="global.galleryPhoto" />
+          <ion-badge id="badge_camera" (click)="openCamera()">
+            <ion-icon name="camera" style="font-size: 16px">
+            </ion-icon>
+          </ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid> -->
+
+
+   <!-- <button ion-button (click)="UpdateImageStorage('TestString')">Save</button> -->
+    <form [formGroup]="profile">
+        <!-- (ngSubmit)="onSubmit(cliprodet)" -->
+      <ion-item>
+        <ion-label style="font-size: 16px" stacked>First Name</ion-label>
+        <ion-input type="text" [(ngModel)]="cliprodet.firstName" formControlName="firstName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-size: 16px" stacked>Middle Name</ion-label>
+        <ion-input type="text" [(ngModel)]="cliprodet.middleName" formControlName="middleName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-size: 16px" stacked>Last Name</ion-label>
+        <ion-input type="text" [(ngModel)]="cliprodet.lastName" formControlName="lastName"></ion-input>
+      </ion-item>
+      <br/>
+      <br/>
+      <div text-center>
+        <button ion-button (click)="location()">Get Location</button>
+      </div>
+      <ion-item>
+        <ion-label style="font-size: 16px" stacked>Latitude</ion-label>
+        <ion-input type="number" [(ngModel)]="cliprodet.latitude" formControlName="latitude"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-size: 16px" stacked>Longitude</ion-label>
+        <ion-input type="number" [(ngModel)]="cliprodet.longitude" formControlName="longitude"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-size: 16px" stacked>Street 1</ion-label>
+        <ion-input type="text" [(ngModel)]="cliprodet.street1" formControlName="street1"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-size: 16px" stacked>Street 2</ion-label>
+        <ion-input type="text" [(ngModel)]="cliprodet.street2" formControlName="street2"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-size: 16px" stacked>City</ion-label>
+        <ion-input type="text" [(ngModel)]="cliprodet.city" formControlName="city"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-size: 16px" stacked>State</ion-label>
+        <ion-input type="text" [(ngModel)]="cliprodet.state" formControlName="state"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-size: 16px" stacked>Zipcode</ion-label>
+        <ion-input type="text" [(ngModel)]="cliprodet.zipcode" formControlName="zipcode"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-size: 16px" stacked>Contact No.</ion-label>
+        <ion-input type="text" [(ngModel)]="cliprodet.mobileNo" formControlName="mobileNo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-size: 16px" stacked>Mail Id</ion-label>
+        <ion-input type="text" [(ngModel)]="cliprodet.emailId" formControlName="emailId"></ion-input>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <button ion-button style="background-color: red" block (click)="cancel()">Cancel</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button type="submit" block [disabled]="!profile.valid" (click)="onSubmit(cliprodet)">Save</button>
+
+        </ion-col>
+      </ion-row>
+    </form>
+
+  </div>
+</ion-content>

@@ -1,0 +1,42 @@
+page-cgreview {
+    .cgorg{
+        height: 50px;
+        width:  50px;
+        border-radius: 100%;
+    }
+  
+    .toolbar-title-ios {
+        margin-left: -19px;
+      }
+      .ion-md-checkmark:before,.ion-ios-checkmark:before {
+        
+        margin-left: 35px;
+      }
+      .ion-md-close:before,.ion-ios-close:before {
+        
+        margin-left: 35px;
+      }
+      
+      .circle {
+        height: 50px;
+        width: 50px;
+        // background-color: #90CAF9;
+        border-radius: 50%;
+        border: 3px solid #42A5F5;
+      }
+      .letter {
+          display:block;
+          visibility:hidden;
+          margin-top: 5px;
+          font-size:25px;
+          margin-left:14px;
+          color: #42A5F5;
+      }
+      
+      .letter:first-letter {
+          visibility:visible;
+      }
+      ion-icon::before {
+        font-size: 17px;  
+    }
+}

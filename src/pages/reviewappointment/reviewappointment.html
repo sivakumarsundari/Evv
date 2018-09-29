@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar color="primary" style="padding: 0">
+    <ion-grid>
+      <ion-row  align-items-center>
+        <ion-col col-10>
+          <ion-title text-center style="padding-left:20%">View Appointment</ion-title>
+        </ion-col>
+        <ion-col col-2 style="padding: 0">
+          <button ion-button clear (click)="goback()"
+            style="text-transform: none;color: white;float: right;" >Done</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content text-center *ngFor="let i of records" style="background-color: #F5F5F5">
+
+  
+  <ion-grid style="background-color: white;">
+      <p style="color: grey">{{currentdate | date:'fullDate'}}</p>
+
+      <ion-row text-center >
+          <ion-col col-12>
+            <div item-start *ngIf="reviewdet.employeePhoto!=null;">
+              <img class="img" [src]="_DomSanitizer.bypassSecurityTrustUrl(reviewdet.employeePhoto)" >
+              <!-- {{i.clientPhoto}} -->
+            </div>
+            <div item-start *ngIf="reviewdet.employeePhoto==null&&reviewdet.isMale==true;">
+              <img class="img" src="assets/imgs/male.png">
+              <!-- {{i.clientPhoto}} -->
+            </div>
+            <div item-start *ngIf="reviewdet.employeePhoto==null&&reviewdet.isMale!=true;">
+              <img class="img" src="assets/imgs/female.png">
+              <!-- {{i.clientPhoto}} -->
+            </div>
+          </ion-col>
+          </ion-row>         
+          <h6 style="margin: 10px;margin-bottom: 0;">{{reviewdet.employeeName|uppercase}}</h6>
+          <p style="margin-top:0;color: grey"><i>{{reviewdet.schstartdt|date:'hh:mm a'}} - {{reviewdet.schenddt|date:'hh:mm a'}}</i></p>
+          <br>
+          <div *ngIf="!reviewdet.isStarted && !reviewdet.isCompleted && !reviewdet.isCancelled">
+      <ion-row text-center style="font-size: 25px;" >
+          <ion-col col-6>
+            <a href="tel:{{reviewdet.agenctPhoneNo}}">   <ion-icon name="call"  color="primary"></ion-icon></a>
+          </ion-col>
+          <ion-col col-6 >
+              <!-- [ngStyle]=" {'opacity':(!isstaffjoin || ispodended) ? '0.5': '' } -->
+              <ion-icon  name="close-circle" color="primary" (click)="showConfirm()" [ngStyle]="{'pointer-events':(reviewdet.isStarted || reviewdet.isCancelled)? 'none':'' }"></ion-icon>
+          </ion-col>
+      </ion-row>
+        <ion-row text-center style="color: grey;font-size: 14px;">
+          <ion-col col-6>
+              <label>Agency:{{reviewdet.agenctPhoneNo}} </label>
+            </ion-col>
+            <ion-col col-6  [ngStyle]="{'pointer-events':(reviewdet.isStarted || reviewdet.isCancelled)? 'none':'' }">
+                <label (click)="showConfirm()">Cancel Appt</label>
+              </ion-col>
+      </ion-row>
+      </div>
+      <div *ngIf="reviewdet.isStarted && !reviewdet.isCompleted && !reviewdet.isCancelled">
+        <ion-icon name="checkmark-circle" style="color: #0aea0a;font-size: 20px">&nbsp;&nbsp;Appointment Started</ion-icon> 
+    </div>
+    <div *ngIf="reviewdet.isCompleted && !reviewdet.isCancelled">
+      <ion-icon name="information-circle" color=primary style="font-size: 20px">&nbsp;&nbsp;Appointment Completed</ion-icon> 
+  </div>
+  <div *ngIf="reviewdet.isCancelled">
+    <ion-icon name="close-circle" style="color: red;font-size: 20px">&nbsp;&nbsp;Appointment Cancelled</ion-icon> 
+</div>
+    <br>
+      <!-- <ion-row text-center style="color: grey;font-size: 14px;">
+        <ion-col col-6>
+            <label></label>
+          </ion-col>
+          <ion-col col-6>
+              
+            </ion-col>
+    </ion-row> -->
+  </ion-grid>       
+  <p style="text-align: left;margin-left: 5%;font-weight: 900" padding >
+    {{reviewdet.employeeName|uppercase}} from {{reviewdet.agencyName|uppercase}} will help you with {{reviewdet.jobname}}.</p>
+
+</ion-content>

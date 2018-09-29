@@ -1,0 +1,164 @@
+<ion-header text-center>
+  <ion-toolbar color="primary" style="padding: 0">
+    <ion-grid style="padding: 0">
+      <ion-row align-items-center>
+        <!-- <ion-col>
+          <button ion-button clear>
+            <ion-icon name="person" style="font-size: 30px;color: white" (click)="test()">
+              <ion-badge id="notifications-badge" color="danger">3</ion-badge>
+            </ion-icon>
+          </button>
+        </ion-col> -->
+        <ion-col  col-10>
+          <ion-title style="padding-left:20%">Dashboard</ion-title>
+        </ion-col>
+        <ion-col col-2 >
+          <button ion-button clear style="float: right" (click)="presentPopover($event)">
+              <ion-icon name="menu" style="color: white;font-size: 25px;padding-right: 8px"></ion-icon>
+            </button>
+        <!-- <ion-icon name="menu" style="font-size: 30px;color: white;float: right;" (click)="carehistory()"></ion-icon> -->
+      </ion-col>
+        <!-- <ion-col>
+          <button ion-button clear style="text-transform: none;float: right;padding:5px;color:white" (click)="logout()">Logout</button>
+        </ion-col> -->
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background-color: #EEEEEE">
+  <ion-card class="card" *ngIf="missedsheet.length!=0" style="margin: 10px;padding: 10px;padding-bottom: 0;width: calc(100% - 20px)" >
+    <ion-row align-items-start >
+      <ion-col col-1>
+        <div>
+          <ion-badge id="missing" class="test" color="danger" >!</ion-badge>
+        </div>
+      </ion-col>
+      <ion-col col-11 style="padding-left: 10px">
+        <h2><b>{{missedsheet.length}} Timesheets to submit</b></h2>
+        <p>Its look like you have some timesheets to complete and submit.</p>
+        <button ion-button style="color:primary;text-transform: none;padding-left: 0px;" clear (click)="multc()" >Complete it now</button>
+      </ion-col>
+    </ion-row> 
+  
+  
+  </ion-card>
+  <div *ngFor="let det of missedsheet"  >
+    <ion-card class="card" [hidden]="det.ismisdforget" style="margin: 10px;padding: 10px;padding-bottom: 0;width: calc(100% - 20px)" (click)="SubmitTimesheetmissed(det)">
+               <ion-row align-items-start >
+                   <ion-col col-1>
+                     <div>
+                       <ion-badge id="missing" class="test" color="danger" >!</ion-badge>
+                     </div>
+                   </ion-col>
+                   <ion-col col-11 style="padding-left: 10px">
+                     <h2><b>Incomplete Visit Record</b></h2>
+                     <p>For {{det.tcDate| date:'fullDate'}}.</p>
+                     <button ion-button style="color:primary;text-transform: none;padding-left: 0px;" clear >Complete it now</button>
+                   </ion-col>
+                 </ion-row>
+         </ion-card>
+        </div>
+
+  <div text-center>
+    <h1 style="margin: 10px;padding-top: 3%">Today</h1>
+    <p style="margin-top:0">{{currentdate | date:'fullDate'}}</p>
+  </div>
+  <ion-card *ngFor="let i of schedulelist" style="margin: 5px;padding: 10px;padding-bottom: 0">
+    <ion-item (click)="viewclientdetails(i)">
+      <ion-avatar item-start *ngIf="i.clientPhoto!=null;">
+        <img class="img" [src]="_DomSanitizer.bypassSecurityTrustUrl(i.clientPhoto)" >
+        <!-- {{i.clientPhoto}} -->
+      </ion-avatar>
+      <ion-avatar item-start *ngIf="i.clientPhoto==null&&i.isMale==true;">
+        <img class="img" src="assets/imgs/male.png">
+        <!-- {{i.clientPhoto}} -->
+      </ion-avatar>
+      <ion-avatar item-start *ngIf="i.clientPhoto==null&&i.isMale!=true;">
+        <img class="img" src="assets/imgs/female.png">
+        <!-- {{i.clientPhoto}} -->
+      </ion-avatar>
+
+      <h2 style="color:black;font-weight: 500">{{i.sdt | date: 'h:mm a'}}: {{i.clientName | uppercase }}</h2>
+      <p style="color:black;">{{i.totalhours }} minutes</p>
+    </ion-item>
+    <div>
+      <!-- {{currentdateTime$ | async}} -->
+
+      <!-- <div *ngIf="!i.isCancelled"> && i.isWantStarted -->
+      <div>
+        <ion-fab *ngIf="!i.isStarted && !i.isCancelled" style="padding-left: 70%;">
+          <button ion-fab style="margin:-30px;background-color: rgb(48, 230, 139); border: 2px solid white;" (click)="presentAlert(i)"> <!--presentAlert(i);-->
+            <ion-icon style="font-size:16px;">Start</ion-icon>
+          </button>
+        </ion-fab>
+        <ion-fab *ngIf="i.isStarted && !i.isCompleted" style="padding-left:70%">
+          <button ion-fab style="margin:-30px;background-color:red; border: 2px solid white" (click)="doConfirm(i)">
+            <ion-icon style="font-size:16px;">Stop</ion-icon>
+          </button>
+        </ion-fab>
+        <ion-fab *ngIf="i.isStarted && i.isCompleted && !i.istimesubmit" style="padding-left:70%">
+          <button ion-fab style="margin:-30px;background-color:#FBC02D; border: 2px solid white" (click)="SubmitTimesheet(i)">
+            <ion-icon style="font-size:16px;">Submit</ion-icon>
+          </button>
+        </ion-fab>
+      </div>
+      <div>
+        <p style="float: left;margin-left:70px;color: grey;margin-top: 5px;margin-bottom: 28px;" *ngIf="!i.isStarted"> </p>
+        <p style="float: left;margin-left:70px;color: grey;margin-top: 5px;" *ngIf="i.isStarted && !i.isCompleted"> Started at {{i.tcsdt | date:'h:mm a'}}</p>
+        <!--{{(currentdateTime$ | async) - addDay(i.tcsdt) | date:'hh:mm' }}-->
+        <ion-icon style="margin-left: 10px;margin: 8px;color:grey" name="checkmark" *ngIf="i.isCompleted && !i.isCancelled"> Duration {{i.tctotalhours}} min</ion-icon>
+        <ion-icon style="margin-left: 10px;margin: 8px;color:red" name="close-circle" *ngIf="i.isCancelled"> Appointment Cancelled</ion-icon>
+      </div>
+    </div>
+
+  </ion-card>
+  <!-- <ion-card style="margin: 8px;padding: 10px;margin-bottom: 15px">
+    <ion-item>
+      <ion-avatar item-start>
+        <img  class="img" src="assets/imgs/profile3.jpg">
+      </ion-avatar>
+      <h2>12:00 PM: Sally Hanson</h2>
+      <p>4 Hours</p>
+    </ion-item>
+  </ion-card> -->
+  <!-- <ion-card style="margin: 8px;padding: 10px;margin-bottom: 15px">
+    <ion-item>
+      <ion-avatar item-start>
+        <img  class="img" src="assets/imgs/c.PNG">
+      </ion-avatar>
+      <h2>4:30PM</h2>
+      <p>1 Hour</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img  class="img" src="assets/imgs/profile1.jpg">
+      </ion-avatar>
+      <h2>Jake Smith</h2>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img  class="img" src="assets/imgs/profile2.jpg">
+      </ion-avatar>
+      <h2>Beckett Thompson</h2>
+    </ion-item>
+  </ion-card> -->
+
+  <!-- <div class=" success alertred " *ngIf="schedulelist.length==0">
+
+
+    <span class="closebtnred" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong style="color:black;text-align: center;">No pods available Today</strong>
+
+  </div> -->
+
+  <div class="alert" *ngIf="schedulelist.length==0">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>No Apppointments are available Today!</strong>
+  </div>
+
+   <!-- <button (click)="doCheckbox()">dfggggggggggg</button>  -->
+
+</ion-content>

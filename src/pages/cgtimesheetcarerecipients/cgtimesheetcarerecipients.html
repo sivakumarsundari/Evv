@@ -1,0 +1,92 @@
+<ion-header text-center>
+  <ion-toolbar color="primary" style="padding: 0">
+    <ion-grid style="padding: 0">
+      <ion-row align-items-center>
+        <!-- <ion-col col-2 style="padding: 0">
+          <button ion-button clear>
+            <ion-icon name="person" style="font-size: 30px;color: white" (click)="test()">
+            <ion-badge id="notifications-badge" color="danger">3</ion-badge>
+            </ion-icon>
+          </button> -->
+        <!-- </ion-col> -->
+        <ion-col col-10>
+          <ion-title style="padding-left:20%">Care Recipients</ion-title>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button clear style="float: right" (click)="presentPopover($event)">
+            <ion-icon name="menu" style="color: white;font-size: 25px;padding-right: 8px"></ion-icon>
+          </button>
+          <!-- <ion-icon name="menu" style="font-size: 30px;color: white;float: right;" (click)="carehistory()"></ion-icon> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background-color: #EEEEEE">
+  <br>
+  <ion-card class="card" *ngFor="let i of displaydata" style="margin: 5px;padding: 10px;padding-bottom: 0;">
+    <!-- <ion-item text-wrap *ngFor="let i of displaydata" (click)="viewapp(i)"> -->
+    <ion-item (click)="viewapp(i)" style="padding: 0">
+      <ion-avatar item-start *ngIf="i.isMale==true;">
+        <img class="img" src="assets/imgs/man.png">
+        <!-- {{i.clientPhoto}} -->
+      </ion-avatar>
+      <ion-avatar item-start *ngIf="!i.isMale==true;">
+        <img class="img" src="assets/imgs/female.png">
+        <!-- {{i.clientPhoto}} -->
+      </ion-avatar>
+      <h2 style="font-weight: 500">{{i.clientName| uppercase }}</h2>
+      <p> Next appointment {{i.nextAppointDt | date:'MM/d/yy' }}</p>
+    </ion-item>
+    <div>
+      <!-- <div *ngIf="i.nonsch != null "> -->
+          <!-- <div *ngIf="i.nonsch == 'demotesr' "> -->
+              <div *ngIf="i.nonsch != null "> 
+        <!-- <ion-fab *ngIf="i.nonsch.tcstartdt != null && i.nonsch.tcstopdt != null && !i.nonsch.isCompleted" style="padding-left: 80%;"> -->
+            <ion-fab *ngIf="i.nonsch.tcstartdt != null && i.nonsch.tcstopdt != null" style="padding-left: 80%;">
+          <button ion-fab style="margin:-30px;background-color: rgb(48, 230, 139); border: 2px solid white;" (click)="start(i);">
+            <ion-icon style="font-size:12px;">Start Visit</ion-icon>
+          </button>
+        </ion-fab>
+        <ion-fab *ngIf="i.nonsch.tcstartdt != null && i.nonsch.tcstopdt == null" style="padding-left:80%">
+          <button ion-fab style="margin:-30px;background-color:red; border: 2px solid white" (click)="stop(i)">
+            <ion-icon style="font-size:16px;">Stop</ion-icon>
+          </button>
+        </ion-fab>
+        <!-- <ion-fab *ngIf="i.nonsch.isCompleted" style="padding-left:80%">
+          <button ion-fab style="margin:-30px;background-color:#FBC02D; border: 2px solid white" (click)="submit(i)">
+            <ion-icon style="font-size:16px;">Submit</ion-icon>
+          </button>
+        </ion-fab> -->
+      </div>
+      <!-- <div *ngIf="i.nonsch == 'demotesr'"> -->
+          <div *ngIf="i.nonsch == null">
+        <ion-fab *ngIf="i.nonsch == null" style="padding-left: 80%;">
+          <button ion-fab style="margin:-30px;background-color: rgb(48, 230, 139); border: 2px solid white;" (click)="start(i);">
+            <ion-icon style="font-size:12px;">Start Visit</ion-icon>
+          </button>
+        </ion-fab>
+      </div>
+    </div>
+    <div>
+      <p style="float: left;margin-left:70px;color: grey;margin-top: 5px;margin-bottom: 28px;" *ngIf="isstart==false"> </p>
+      <p style="float: left;margin-left:70px;color: grey;margin-top: 5px;" *ngIf="isstart==true&& iscompleted==false"> Started at {{Date|date:'shortTime'}}</p>
+      <!--{{(currentdateTime$ | async) - addDay(i.tcsdt) | date:'hh:mm' }}-->
+      <ion-icon style="margin-left: 10px;margin: 8px;color:grey" name="checkmark" *ngIf="iscompleted==true"> Duration 0 min</ion-icon>
+    </div>
+
+  </ion-card>
+  <!-- <ion-item text-wrap  (click)="viewapp()">
+    <ion-avatar item-start >
+      <img class="img" src="assets/imgs/profile5.jpg">
+      <ion-badge item-start id="error" color="danger">!</ion-badge>
+    </ion-avatar>
+    <h2>Tom Mascow</h2>
+    <p>Next Appointment 04/26/18</p> 
+  </ion-item> -->
+  <div class="alert" *ngIf="displaydata.length==0">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>No Care Recipients are available!</strong>
+  </div>
+</ion-content>

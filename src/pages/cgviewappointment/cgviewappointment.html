@@ -1,0 +1,115 @@
+<ion-header>
+    <ion-toolbar color="primary" style="padding: 0">
+        <ion-grid>
+            <ion-row  align-items-center>
+                <ion-col col-10>
+                    <ion-title text-center style="padding-left:20%">View Appointment</ion-title>
+                </ion-col>
+                <ion-col col-2 style="padding: 0">
+                    <button ion-button clear (click)="dashboard()"
+                     style="text-transform: none;color: white;float: right;" >Done</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content  text-center style="background-color: #F5F5F5">
+       
+    <ion-grid style="background-color: white;" >
+        <ion-row text-center >
+            <ion-col col-12 >
+                <div item-start *ngIf="clientdetails.clientPhoto!=null;">
+                    <img class="img" [src]="_DomSanitizer.bypassSecurityTrustUrl(clientdetails.clientPhoto)" >
+                    <!-- {{i.clientPhoto}} -->
+                  </div>
+                  <div item-start *ngIf="clientdetails.clientPhoto==null&&clientdetails.isMale==true;">
+                    <img class="img" src="assets/imgs/male.png">
+                    <!-- {{i.clientPhoto}} -->
+                  </div>
+                  <div item-start *ngIf="clientdetails.clientPhoto==null&&clientdetails.isMale!=true;">
+                    <img class="img" src="assets/imgs/female.png">
+                    <!-- {{i.clientPhoto}} -->
+                  </div>
+              <!-- src={{clientdetails.clientPhoto}} -->
+            </ion-col>
+            </ion-row>         
+            <h6 style="margin: 10px;margin-bottom: 0;">{{clientdetails.stdt | date: 'h:mm a'}}: {{clientdetails.clientName | uppercase}}</h6>
+            <p style="margin-top:0;color: gray"><i>{{clientdetails.duration}} minutes</i></p>
+            <br>
+            
+            <div *ngIf="isCompleted==false && isStarted==false && isCancelled==false">
+        <ion-row text-center style="font-size: 25px;" >
+                <ion-col col-2></ion-col>
+            <ion-col col-4>
+                <ion-icon name="menu" color="primary"></ion-icon>
+            </ion-col>
+            <!-- <ion-col col-4>
+                <ion-icon name="person-add"  color="primary"></ion-icon>
+            </ion-col> -->
+            <ion-col col-4>
+                <ion-icon name="close-circle" color="primary" (click)="cancelapp()"></ion-icon>
+            </ion-col>
+        </ion-row>
+          <ion-row text-center style="color: grey;font-size: 14px;">
+                <ion-col col-2></ion-col>
+            <ion-col col-4>
+              <label>Eligibility</label>
+            </ion-col>
+            <!-- <ion-col col-4>
+                <label>Request Sub</label>
+              </ion-col> -->
+              <ion-col col-4>
+                  <label (click)="cancelapp()">Cancel Appt</label>
+                </ion-col>
+        </ion-row>
+        </div>
+        <div *ngIf="isCompleted==false && isStarted==true && isCancelled==false ">
+                <ion-icon name="checkmark-circle" style="color: #0aea0a;font-size: 20px">&nbsp;&nbsp;Appointment Started</ion-icon> 
+            </div>
+            <div *ngIf="isCompleted==true && isStarted==true && isCancelled==false">
+              <ion-icon name="information-circle" color=primary style="font-size: 20px">&nbsp;&nbsp;Appointment Completed</ion-icon> 
+          </div>
+          <div *ngIf="isCompleted==false && isStarted==false && isCancelled==true">
+            <ion-icon name="close-circle" style="color: red;font-size: 20px">&nbsp;&nbsp;Appointment Cancelled</ion-icon> 
+        </div>
+        <br>
+    </ion-grid> 
+        
+    
+    <ion-grid padding text-wrap>
+       
+               <p style="margin-left: 0%;
+               font-weight: 900;">{{clientdetails.clientName | uppercase}} needs <b *ngFor="let t of clientdetails.clientjt" style="text-align:justify">{{t.taskName}},</b>.</p>
+          
+        <ion-row align-items-center>
+            <ion-col col-2>
+                <ion-icon name="pin" style="text-transform: none;font-size: 23px;color:grey"></ion-icon>
+            </ion-col>
+            <ion-col col-10 >
+                    <ion-label style="text-align: left;margin-left: -1%;font-weight: 500">{{clientdetails.street1}}, {{clientdetails.street2}} {{clientdetails.city}} {{clientdetails.state}} {{clientdetails.zipCode}}</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row align-items-center>
+            <ion-col col-2>
+                <ion-icon name="call" style="text-transform: none;font-size: 23px;color:grey"></ion-icon>
+            </ion-col>
+            <ion-col col-10>
+                    <ion-label style="text-align: left;margin-left: -1%;font-weight: 500">
+                            <a href="tel:{{clientdetails.mobileNo}}">{{clientdetails.mobileNo}}</a></ion-label>
+            </ion-col>
+        </ion-row>           
+        <p style="text-align: left;margin-left: 3%;color: gray;font-size: 13px;"><i>Assigned by Sarah B: {{clientdetails.agencyName}} Agency</i></p>
+        <ion-row align-items-center>
+            <ion-col col-2>
+                <ion-icon name="call" style="text-transform: none;font-size: 23px;color:grey"></ion-icon>
+            </ion-col>
+            <ion-col col-10>
+                    <ion-label style="text-align: left;margin-left: -1%;font-weight: 500">
+                            <a href="tel:{{clientdetails.agencyNo}}">{{clientdetails.agencyNo}}</a></ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+   
+    
+</ion-content>

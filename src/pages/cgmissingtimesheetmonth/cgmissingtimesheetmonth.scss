@@ -1,0 +1,71 @@
+page-cgmissingtimesheetmonth {
+    #error{
+        background-color: red;
+        position: absolute;
+        top: -9px;
+        right: 2px;
+        border-radius: 100%;
+        float: left;
+        
+}
+.range-md .range-bar-active {
+    bottom: 0;
+    width: auto;
+    background:linear-gradient(to right, red 30%,yellow 30%,yellow 60% ,green 0);
+}
+.ion-md-close-circle:before {
+    content: "\f2bf";
+    font-size: 1.4rem;
+  }
+  
+
+.range-md .range-bar {
+    left: 0;
+    top: 21px;
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, red 30%,yellow 30%,yellow 60% ,green 0);
+    pointer-events: none;
+}
+.range-md .range-knob {
+    left: 12px;
+    top: 0px;
+     border-radius: 0%; 
+    position: absolute;
+    z-index: 2;
+    -webkit-transform: scale(0.67);
+    transform: scale(0.67);
+    width: 0px;
+	height: 0px;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 15px solid #488aff;
+}
+
+
+.range-md .range-knob-active {
+    left: 12px;
+    top: 0px;
+    border-radius: 0%; 
+    position: absolute;
+    z-index: 2;
+    -webkit-transform: scale(0.67);
+    transform: scale(0.67);
+    width: 0px;
+	height: 0px;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 15px solid #488aff;
+}
+.item-md {
+     padding-left:0;
+}
+.toolbar-title-ios {
+    margin-left: -19px;
+  }
+  .card-ios, .card-md {
+    
+    width: calc(100% - 10px);
+}
+}

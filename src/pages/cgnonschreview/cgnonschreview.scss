@@ -1,0 +1,69 @@
+page-cgnonschreview {
+    .circle {
+        height: 50px;
+        width: 50px;
+        // background-color: #90CAF9;
+        border-radius: 50%;
+        border: 3px solid #42A5F5;
+      }
+      .letter {
+          display:block;
+          visibility:hidden;
+          margin-top: 5px;
+          font-size:25px;
+          margin-left:14px;
+          color: #42A5F5;
+      }
+      
+      .letter:first-letter {
+          visibility:visible;
+      }
+      .ion-md-checkmark:before,.ion-ios-checkmark:before {
+        
+        margin-left: 35px;
+      }
+
+}
+.buttonCss {
+    .title{
+      text-align: center;
+    }
+        button.alert-button:nth-child(1){
+       
+          border: none;
+          color: #008CBA;
+        //   padding: 8px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+        //   font-size: 16px;
+        //   margin: 4px 2px;
+          cursor: pointer;
+        }
+      
+        button.alert-button:nth-child(2){
+          background-color: #008CBA;; 
+          border: none;
+          color: white;
+         padding: 5px 10px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+        //   font-size: 16px;
+          margin: 2px 40px;
+          cursor: pointer;
+        }
+      }
+    
+      .buttonback2 {
+        background-color: #008CBA; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }

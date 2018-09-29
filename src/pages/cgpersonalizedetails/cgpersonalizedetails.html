@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary" style="padding: 0">
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col col-2 style="padding: 0">         
+          <button ion-button clear style="text-transform: none;color: white" (click)="cancel()">Cancel</button> 
+        </ion-col>
+        <ion-col col-10>
+          <ion-title text-center style="padding-right:22%">Personalize Profile</ion-title>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding text-center>
+
+  <div style="padding:20px">
+    <span class="dot" (click)="photo()"></span>
+    <span class="dot"></span>
+    <span class="circle" (click)="exp()"></span>
+    <span class="circle" (click)="certifi()"></span>
+  </div>
+
+  <h1>Next, let's add some personal details.</h1>
+
+  <ion-list style="padding-top: 30px">
+    <ion-item>
+      <ion-label style="color: black">Gender</ion-label>
+      <ion-select [(ngModel)]="gender">
+        <ion-option value="m">Male</ion-option>
+        <ion-option value="f">Female</ion-option>
+        <ion-option value="o">Others</ion-option> 
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label style="color: black">Frangance-free</ion-label>
+      <ion-select [(ngModel)]="fragance-free">
+        <ion-option value="y">Yes</ion-option>
+        <ion-option value="n">No</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+<ion-footer style="padding: 5px;">
+  <button ion-button style="text-transform: none;"  (click)="next()" full>Next</button>
+</ion-footer>

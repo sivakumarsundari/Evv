@@ -1,0 +1,21 @@
+page-cgmonthtimeentries {
+    .circle {
+        height: 50px;
+        width: 50px;
+        // background-color: #90CAF9;
+        border-radius: 50%;
+        border: 3px solid #42A5F5;
+      }
+      .letter {
+          display:block;
+          visibility:hidden;
+          margin-top: 5px;
+          font-size:25px;
+          margin-left:14px;
+          color: #42A5F5;
+      }
+      
+      .letter:first-letter {
+          visibility:visible;
+      }
+}

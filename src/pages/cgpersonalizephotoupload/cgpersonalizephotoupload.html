@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary" style="padding: 0">
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col col-2 style="padding: 0">         
+          <button ion-button clear style="text-transform: none;color: white" (click)="cancel()">Cancel</button> 
+        </ion-col>
+        <ion-col col-10>
+          <ion-title text-center style="padding-right:22%">Personalize Profile</ion-title>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding text-center>
+
+  <div style="padding:20px">
+    <span class="dot"></span>
+    <span class="circle" (click)="detail()"></span>
+    <span class="circle" (click)="exp()"></span>
+    <span class="circle" (click)="certifi()"></span>
+  </div>
+
+  <h1 *ngFor="let i of records">{{i.cgname}},start by adding a photo of yourself.</h1>
+  
+  <ion-grid style="padding-top:30px;">
+    <ion-row justify-content-center>
+      <img class="imgs"  src="assets/imgs/pic1.png">
+    </ion-row>
+  </ion-grid>
+   
+</ion-content>
+
+<ion-footer style="padding: 5px;">
+  <button ion-button style="text-transform: none;" (click)="next()" block>Next</button>
+</ion-footer>

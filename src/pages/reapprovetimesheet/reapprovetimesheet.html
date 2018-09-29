@@ -1,0 +1,199 @@
+<ion-header text-center>
+  <ion-toolbar color="primary" style="padding: 0">
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col col-2 style="padding: 0">
+          <button ion-button clear style="text-transform: none;color: white" (click)="cancel()">Cancel</button>
+        </ion-col>
+        <ion-col col-10>
+          <ion-title text-center style="padding-right:22%">Approve Timesheet</ion-title>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <div *ngIf="missedtc!= null">
+    <div *ngIf="isedit==false">
+
+      <ion-item text-center no-lines>
+        <ion-grid>
+          <ion-row>
+            <ion-col offset-6>
+              <div class="circle" style="margin-left: -28px">
+                <div class="letter">{{missedtc.agencyName}}</div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <h1>{{missedtc.agencyName}}</h1>
+        <p>{{missedtc.agenctPhoneNo}}</p>
+      </ion-item>
+
+      <ion-item no-lines style="background-color: #F5F5F5">
+        <ion-avatar item-start *ngIf="missedtc.isMale==true;">
+          <img class="img" src="assets/imgs/man.png">
+          <!-- {{i.clientPhoto}} -->
+        </ion-avatar>
+        <ion-avatar item-start *ngIf="!missedtc.isMale==true;">
+          <img class="img" src="assets/imgs/female.png">
+          <!-- {{i.clientPhoto}} -->
+        </ion-avatar>
+        <p>RECIPIENT OF CARE</p>
+        <h2>{{global.name |uppercase}}</h2>
+      </ion-item>
+      <ion-item no-lines style="background-color: #F5F5F5">
+          <ion-avatar item-start *ngIf="missedtc.employeePhoto!=null;">
+              <img class="img" [src]="_DomSanitizer.bypassSecurityTrustUrl(missedtc.employeePhoto)" >
+              <!-- {{i.clientPhoto}} -->
+            </ion-avatar>
+            <ion-avatar item-start *ngIf="missedtc.employeePhoto==null&&missedtc.isMale==true;">
+              <img class="img" src="assets/imgs/male.png">
+              <!-- {{i.clientPhoto}} -->
+            </ion-avatar>
+            <ion-avatar item-start *ngIf="missedtc.employeePhoto==null&&missedtc.isMale!=true;">
+              <img class="img" src="assets/imgs/female.png">
+              <!-- {{i.clientPhoto}} -->
+            </ion-avatar>
+        <p>PROVIDED BY</p>
+        <h2>{{missedtc.employeeName|uppercase}}</h2>
+      </ion-item>
+
+      <ion-grid text-center>
+        <ion-row>
+          <ion-col col-6 style="border: 1px solid gray">
+            <ion-label style="color:grey">DATE OF SERVICE</ion-label>
+            <ion-label>{{missedtc.servicedate|date:'MMMM d,yyyy '}}</ion-label>
+          </ion-col>
+          <ion-col col-6 style="border: 1px solid gray">
+            <ion-label style="color:grey">TOTAL TIME</ion-label>
+            <ion-label>{{missedtc.tctotalhours}} Min</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6 style="border: 1px solid gray">
+            <ion-label style="color:grey">SERVICE TYPE </ion-label>
+            <ion-label>PCA Service</ion-label>
+            <!-- {{missedtc.taskdonelist[0].jobName}} -->
+          </ion-col>
+          <ion-col col-6 style="border: 1px solid gray">
+            <ion-label style="color:grey">RATIO </ion-label>
+            <ion-label>1:{{missedtc.serviceRatio}}</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <h5 style="padding:10px;padding-top: 15px;background-color: #F5F5F5;margin: 0">ACTIVITIES</h5>
+      <div *ngFor="let c of missedtc.taskdonelist">
+        <ion-row align-items-center>
+          <ion-col col-2>
+            <ion-icon style="font-weight: 900;font-size: 2rem;color: #0aea0a" name="checkmark"></ion-icon>
+          </ion-col>
+          <ion-col col-10>
+            <ion-label style="margin: 0">{{c.taskName}}</ion-label>
+          </ion-col>
+        </ion-row>
+      </div>
+      <h5 style="padding:10px;padding-top: 15px;background-color: #F5F5F5;margin: 0">EMPLOYEE NOTES</h5>
+      <!-- <h6 style="padding-left: 10px">{{missedtc.empnotesnotes}}</h6> -->
+      <ion-textarea [(ngModel)]="missedtc.empnotesnotes" class="note" style="pointer-events: none;"></ion-textarea>
+
+      <h5 style="padding:10px;padding-top: 15px;background-color: #F5F5F5;margin: 0">NOTES</h5>
+
+
+      <ion-row style=" background-color:#E3F2FD;">
+
+        <ion-textarea [(ngModel)]="missedtc.clinotesnotes" class="note" placeholder="Enter your notes here"></ion-textarea>
+
+      </ion-row>
+
+      <ion-row align-items-center style="background-color: #F5F5F5;">
+        <ion-col style="padding: 0">
+          <h5 style="padding:10px;padding-top: 15px;margin: 0">TIME IN</h5>
+        </ion-col>
+        <ion-col style="padding: 0">
+          <ion-icon name="create" style="float: right;margin-right: 10px" (click)="edit()">&nbsp;&nbsp;Edit Time</ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-grid style="padding: 0">
+        <ion-row>
+          <h3 style="margin: 10px">{{missedtc.tcStarttime| date :'hh:mm a'}}</h3>
+        </ion-row>
+        <ion-row>
+          <!-- <p style="margin-bottom:10px;margin-top: 5px;"><i>{{reviewdetail.street1}} {{reviewdetail.street2}} {{reviewdetail.state}} {{reviewdetail.zipCode}}</i></p> -->
+        </ion-row>
+        <ion-row style="padding-top: 2%">
+          <ion-item no-lines *ngIf="missedtc.intimeLocver==true">
+            <div>
+              <!-- <img class="img" [src]="reviewdetail.inTimeMap"> -->
+              <img class="img" [src]="_DomSanitizer.bypassSecurityTrustUrl(missedtc.inTimeMap)" style=" display: block;
+                width: 100%;
+                height: 120px;">
+            </div>
+        
+            <ion-icon small name="checkmark-circle" style="color:#0aea0a;float:left;font-size:12px;" icon-start>&nbsp;&nbsp;LOCATION VERIFIED BY GPS</ion-icon>
+        
+          </ion-item>
+          <div *ngIf="!missedtc.intimeLocver==true">
+            <ion-icon small name="close-circle" style="color:red;float:left;font-size:12px;margin-left: 10px" icon-start>&nbsp;&nbsp;LOCATION COULD NOT BE VERIFIED BY GPS</ion-icon>
+          </div>
+        </ion-row>
+      </ion-grid>
+      <h5 style="padding:10px;padding-top: 15px;background-color: #F5F5F5;margin: 0">TIME OUT</h5>
+      <ion-grid style="padding: 0">
+        <ion-row>
+          <h3 style="margin: 10px">{{missedtc.tcEndtime| date :'hh:mm a'}}</h3>
+        </ion-row>
+        <ion-row style="padding-top: 2%">
+        <ion-item no-lines *ngIf="missedtc.outtimeLocver==true">
+            <div>
+              <!-- <img class="img" [src]="reviewdetail.outTimeMap"> -->
+              <img [src]="_DomSanitizer.bypassSecurityTrustUrl(missedtc.outTimeMap)" style=" display: block;
+                          width: 100%;
+                          height: 120px;">
+            </div>
+            <h2>
+            <ion-icon small name="checkmark-circle" style="color:#0aea0a;float:left;font-size:12px;" icon-start>&nbsp;&nbsp;LOCATION VERIFIED BY GPS</ion-icon>
+          </h2>
+          </ion-item>
+          <div *ngIf="!missedtc.outtimeLocver==true">
+            <ion-icon small name="close-circle" style="color:red;float:left;font-size:12px;margin-left: 10px" icon-start>&nbsp;&nbsp;LOCATION COULD NOT BE VERIFIED BY GPS</ion-icon>
+          </div>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+  </div>
+  
+  <div *ngIf="isedit== true" style="background-color: #F5F5F5">
+      <br>
+    <ion-card  style="padding: 10px">
+      <ion-list>
+
+        <ion-item>
+          <ion-label style="font-size: 16px" stacked>Time In</ion-label>
+          <ion-datetime displayFormat="hh:mm A" [(ngModel)]="missedtc.tcStarttime">{{missedtc.tcStarttime}}</ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label style="font-size: 16px" stacked>Time Out</ion-label>
+          <ion-datetime displayFormat="hh:mm A" [(ngModel)]="missedtc.tcEndtime">{{missedtc.tcEndtime}}</ion-datetime>
+
+        </ion-item>
+
+      </ion-list>
+<br>
+      <div text-center>
+        <button ion-button id="btn" (click)="edittimesheet(missedtc)" style="background-color:rgb(0, 153, 255) ">Save</button>
+        <button ion-button id="btn" (click)="cancel()" style="background-color:red ">Cancel</button>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>
+<ion-footer style="padding: 5px">
+  <p style="color: grey">If this is correct, please sign and submit your timesheet. Remember, it is a federal crime to submit a fraudalent timesheet.</p>
+  <button ion-button color="primary" style="text-transform: none" *ngIf="isedit1==false" [disabled]="isedit==true" (click)="submit(missedtc)" full>Verify and Sign</button>
+  <button ion-button color="primary" style="text-transform: none" *ngIf="isedit1==true" (click)="submit(missedtc)" full>Resubmit to Employee</button>
+</ion-footer>

@@ -1,0 +1,68 @@
+page-cgtimesheetcarerecipients {    
+    
+    #notifications-badge {
+        background-color: red;
+        position: absolute;
+        top: 0px;
+       left:10px;
+        border-radius: 100%;
+        font-size: 10px;
+    }
+    
+    #error{
+        background-color: red;
+        position: absolute;
+        top: 0px;
+        border-radius: 100%;
+        font-size: 10px;
+}
+.item-md ion-avatar[item-left],
+.item-md ion-thumbnail[item-left],
+.item-md ion-avatar[item-start],
+.item-md ion-thumbnail[item-start] {
+  margin: 0;
+  margin-right: 5px;
+}
+.item-md {
+  padding-left: 0;
+}
+.img{
+    border: 1px solid rgb(48, 230, 139);
+}
+.ion-ios-person:before {
+  margin-left: 5px;
+  margin: 10px;
+}
+.ion-md-person:before {
+ margin-right: 10px;
+}
+.badge-ios-danger {
+
+  margin: 5px 8px;
+ 
+}
+.button-md {
+
+  padding:0;
+  margin-left: 5px;
+}
+
+.button-ios {
+
+  padding: 0;
+}
+.toolbar-title-ios {
+  margin-left: 0px;
+}
+.toolbar-ios ion-title{
+  padding: 0;
+}
+.toolbar-title {
+
+  overflow: visible;
+}
+.card-ios, .card-md {
+    
+  width: calc(100% - 10px);
+}
+}

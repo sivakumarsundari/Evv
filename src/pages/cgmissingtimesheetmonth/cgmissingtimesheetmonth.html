@@ -1,0 +1,62 @@
+
+<ion-header text-center>
+
+    <ion-navbar color="primary" style="padding: 0">
+    <ion-title style="padding-right: 10%" *ngIf="monthList!=null">{{monthList.monthName}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content text-wrap style="background-color: F5F5F5">
+  <div *ngFor="let miss of dayList;let index=i;">
+    <ion-card style="margin: 5px;padding: 10px;"  (click)=" !miss.isSubmitted && completesheet(miss,i)" >
+      <!-- if(idx > 0) {removeSelected(item.spId)} -->
+       <ion-grid  >
+          <ion-row >
+            <ion-col col-9>
+                <h2 style="font-weight: 500">{{miss.scheduleDT | date:'MMMM dd'}}</h2>
+                <p style="color: grey;font-size:15px" *ngIf="miss.isSubmitted">{{miss.verifiedEntry}} of {{miss.totalEntry}} Entries Verified</p>
+                <p style="color:red;font-size:15px;font-weight: 500" *ngIf="!miss.isSubmitted"><ion-icon name="close-circle"></ion-icon> Timesheet not submitted</p>
+    
+            </ion-col>
+            <ion-col col-3 text-right>
+                <ion-item no-lines>
+
+                    <ion-range [(ngModel)]="miss.sliderValue" color=“danger” pin=“true” ></ion-range>
+                   
+                  </ion-item>
+            </ion-col>
+          </ion-row> 
+        </ion-grid>
+          </ion-card></div>
+          <!-- <ion-card style="padding: 10px;margin: 10px">
+            <ion-grid>
+              <ion-row align-items-center (click)="completesheet()" >
+                <ion-col col-1 >                    
+                   <ion-badge id="error" class="test" color="danger">!</ion-badge>
+                </ion-col>
+                <ion-col>
+                    <h2>April 10</h2>
+                    <p style="color: grey">Not Submitted</p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card>
+          <ion-card style="padding: 10px;margin: 10px">
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-8>
+                      <h2>April 1</h2>
+                      <p style="color: grey">4 of 6 Entries Verified</p>
+                  </ion-col>
+                  <ion-col col-4 text-right>
+                      <ion-item no-lines>
+                          <ion-range [(ngModel)]="sliderValue" color=“danger” pin=“true” ></ion-range>
+                          </ion-item>
+                        </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card> -->
+            <br/>
+</ion-content>

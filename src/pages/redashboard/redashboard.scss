@@ -1,0 +1,103 @@
+page-redashboard {
+    .card {
+        background-color: #FFFFFF;
+        /* just in case there no content*/
+        // padding: 1px 12px;
+        margin: 0 ;
+        // margin-top: 10px;
+        /* shadows and rounded borders */
+        border-radius: 2px;
+        -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+      }
+      .button-md {
+        border-radius: 2px;
+        font-size: 1.4rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        color:primary;   
+       padding-bottom: 6%;
+      }
+      .label-md {
+        margin: 12px;
+      }
+    #missing {
+        background-color: red;
+        position: absolute;
+        top: 100%;
+        right: 5px;
+        margin-inline-start:2px;
+        border-radius: 100%;
+        float: left;
+    }
+    [col-11]{
+        padding: 8px;
+    }
+    .toolbar-title-ios {
+        padding: 0;
+        margin-left: 0px;
+        
+    }
+    .toolbar-title {
+     
+        overflow: visible;
+      }
+      .card-ios, .card-md {
+    
+        width: calc(100% - 10px);
+    }
+    .button-ios {
+        margin: 0;
+     
+    }
+           .label-md {
+            margin: 5px;
+        }
+        .item-md {
+            padding-left: 5px;
+        }
+        .item-md.item-block .item-inner {
+            padding-right: 5px;
+        }
+        .button-md {
+            padding: 0;
+        }
+        .button-clear-ios {
+            padding: 5px;}
+        
+
+}
+
+.card:hover {
+    border: 2px solid #00BCD4;
+}
+.test {
+    -webkit-animation: glowing 1500ms infinite;
+    -moz-animation: glowing 1500ms infinite;
+    -o-animation: glowing 1500ms infinite;
+    animation: glowing 1500ms infinite;
+  }
+  @-webkit-keyframes glowing {
+    0% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+    50% { background-color: #FF0000; -webkit-box-shadow: 0 0 40px #FF0000; }
+    100% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+  }
+  
+  @-moz-keyframes glowing {
+    0% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+    50% { background-color: #FF0000; -moz-box-shadow: 0 0 40px #FF0000; }
+    100% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+  }
+  
+  @-o-keyframes glowing {
+    0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+    50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+    100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+  }
+  
+  @keyframes glowing {
+    0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+    50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+    100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+  }
+  

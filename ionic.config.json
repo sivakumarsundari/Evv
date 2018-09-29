@@ -1,0 +1,7 @@
+{
+  "name": "evv",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

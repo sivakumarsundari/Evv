@@ -1,0 +1,11 @@
+{
+     "android": {
+         "release": {
+          "keystore": "c:\\sbnaApp-key.keystore",
+             "storePassword": "SbNa123$",
+             "alias": "sbnaTech",
+             "password" : "SbNa123$",
+             "keystoreType": ""
+         }
+     }
+ }

@@ -1,0 +1,39 @@
+
+<ion-header>
+
+    <ion-toolbar color="primary" style="padding: 0">
+        <ion-grid>
+          <ion-row align-items-center>
+            <ion-col col-2 style="padding: 0">
+             <button ion-button clear style="text-transform: none;color: white;font-size: 90%;padding-left: 0" (click)="cancel()">Cancel</button>
+            </ion-col>
+            <ion-col col-10>
+    <ion-title text-center style="padding-right:22%">Signature Verification</ion-title>
+  </ion-col>
+ 
+  <!-- <ion-col>
+      <ion-icon style="color: white;font-size: 30px;float: right;" name="more"></ion-icon>
+  </ion-col> -->
+  </ion-row>
+  </ion-grid>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+        <form method='post'>
+            
+    <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()" ></signature-pad>
+    <p style="text-align: center;color: grey">Sign your name using your finger.</p>
+    <div text-center>
+    <button ion-button clear style="color:primary;text-transform: none;" (click)="ngAfterViewInit();">Clear Signature</button>
+  </div>
+  <ion-footer style="padding: 5px" >
+        <button ion-button style="text-transform: none;" block (click)="approve()" [disabled]="!drawstart">Complete Visit</button>
+    </ion-footer>
+    </form>
+    <!-- [ngStyle]="{'pointer-events':this.Signaturevalidations!=null? 'block':'none'}" -->
+  <!-- <button (click)="approvealert()">zdfdfsfddsf</button> -->
+</ion-content>
+

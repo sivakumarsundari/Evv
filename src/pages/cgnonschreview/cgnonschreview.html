@@ -1,0 +1,230 @@
+<ion-header text-center>
+
+    <ion-navbar color="primary">
+      <ion-title style="padding-right: 50px">Review </ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  
+  <ion-content style="background-color: white">
+    <div *ngIf="nonschdetails!=null">
+      <div  *ngIf="isEdit==false">
+              <ion-item text-center no-lines>
+        <ion-grid>
+          <ion-row>
+            <ion-col offset-6>
+              <div class="circle" style="margin-left: -28px">
+                <div class="letter">{{nonschdetails.agencyname}}</div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <h1>{{nonschdetails.agencyname}}</h1>
+        <p>{{nonschdetails.agencyno}}</p>
+      </ion-item>
+      <ion-item no-lines style="background-color: #F5F5F5">
+        <ion-item no-lines style="background-color: #F5F5F5">
+          <ion-avatar item-start *ngIf="nonschdetails.clientPhoto!=null;">
+            <img class="img" [src]="_DomSanitizer.bypassSecurityTrustUrl(nonschdetails.clientPhoto)" >
+            <!-- {{i.clientPhoto}} -->
+          </ion-avatar>
+          <ion-avatar item-start *ngIf="nonschdetails.clientPhoto==null&&nonschdetails.isMale==true;">
+            <img class="img" src="assets/imgs/male.png">
+            <!-- {{i.clientPhoto}} -->
+          </ion-avatar>
+          <ion-avatar item-start *ngIf="nonschdetails.clientPhoto==null&&nonschdetails.isMale!=true;">
+            <img class="img" src="assets/imgs/female.png">
+            <!-- {{i.clientPhoto}} -->
+          </ion-avatar>
+          <p>RECIPIENT OF CARE</p>
+          <h2>{{nonschdetails.clientName|uppercase}}</h2>
+        </ion-item>
+        <ion-item no-lines style="background-color: #F5F5F5">
+          <ion-avatar item-start>
+            <img class="img" src="assets/imgs/male.png">
+          </ion-avatar>
+          <p>PROVIDED BY</p>
+          <h2>{{global.name|uppercase}}</h2>
+        </ion-item>
+  
+      </ion-item>
+      <ion-row align-items-center style="background-color: white;">
+        <ion-col style="padding: 0">
+          <p style="  color:gray;  margin-bottom: -10px;margin-left: 8px;font-size: 15px">DATE OF SERVICE</p>
+          <h4 style="margin-left: 5px;font-size: 18px">{{nonschdetails.date | date :'MMMM d, y '}}</h4>
+        </ion-col>
+        <ion-col style="padding: 0">
+               
+                <ion-icon name="create" style="float: right;margin-right: 10px;"  color="primary" (click)="edit(nonschdetails)" >&nbsp;&nbsp;Edit</ion-icon>
+        </ion-col>
+      </ion-row>
+     <hr style="background-color: gainsboro;">
+    <ion-grid style="background-color: white;">
+        <ion-row>
+            <ion-col col-4>
+                <p style="color:gray; margin-bottom: -5px;font-size: 18px">Time in</p>
+                <h4 style="font-size: 18px"> {{nonschdetails.tcstdt| date :' hh:mm a '}}</h4>
+            </ion-col>
+            <ion-col col-4>
+                    <p style="color:gray ;margin-bottom: -5px;font-size: 18px">Time out </p>
+                    <h4 style="font-size: 18px">{{nonschdetails.tceddt| date :' hh:mm a '}}</h4>
+            </ion-col>
+            <ion-col col-4>
+                    <p style="color:gray; margin-bottom: -5px;font-size: 18px">Total Time</p>
+                    <h4 style="font-size: 18px">{{nonschdetails.duration}} Minutes</h4>
+                </ion-col>
+        </ion-row>
+          
+      </ion-grid>
+      
+      <hr style="background-color: gainsboro;">
+
+      <h5 style="padding:10px;padding-top: 15px;margin: 0;color: gray" >ACTIVITIES</h5>
+     
+
+      <div *ngFor="let i of nonschdetails.jobTaskdet">
+          <ion-row align-items-center *ngIf="i.isCompleted">
+            <ion-col col-2>
+              <ion-icon style="font-weight: 850;font-size: 2rem;color:#4CAF50" name="checkmark"></ion-icon>
+            </ion-col>
+            <ion-col col-10>
+              <ion-label style="margin: 0">{{i.taskName}}</ion-label>
+            </ion-col>
+          </ion-row></div>
+          <hr style="background-color: gainsboro;">
+          <h5 style="padding:10px;padding-top: 5px;background-color: white;margin: 0;color: gray">NOTES</h5>
+
+          <ion-textarea [(ngModel)]="nonschdetails.notes" style="pointer-events: none;background-color: #F5F5F5;border: solid 1px #B0BEC5"></ion-textarea>
+             <!-- <ion-row style="padding-bottom: 10px;padding-top: 10px" >
+
+              <div class="half">
+
+                      <div class="tab" *ngIf="nonschdetails!=null">
+                          <input id="tab1" type="checkbox" name="tabs">
+                        <label for="tab1">Service Detail&nbsp;&nbsp;- &nbsp;&nbsp;{{nonschdetails.date | date :'MMMM d'}}</label>
+                        <div class="tab-content">
+                          <ion-grid>
+                              <ion-row>
+                                  <ion-col>
+                                      <ion-label style="color:black">Service type </ion-label>
+                                  </ion-col>
+                                  <ion-col  *ngIf="nonschdetails.jobTaskdet != null">
+                                      <ion-label style="color:grey;float: right;margin-right: 2%">{{nonschdetails.jobTaskdet[0].jobName}}</ion-label>
+                                  </ion-col> 
+                              </ion-row>
+                              <ion-row>
+                                  <ion-col>
+                                      <ion-label style="color:black">Ratio(Provider:Recipient) </ion-label>
+                                  </ion-col>
+                                  <ion-col>
+                                      <ion-label style="color:grey;float:right;margin-right:2%">1:{{nonschdetails.rserviceratio}}</ion-label>
+                                  </ion-col>
+                              </ion-row>
+                          </ion-grid>
+                  
+                          <h5 style="padding:10px;padding-top: 15px;background-color: #F5F5F5;margin: 0;color:black" >NOTES</h5>
+                      <ion-row style=" background-color:#E3F2FD;color:black">
+                              <ion-textarea [(ngModel)]="nonschdetails.notes" class="note" placeholder="Enter notes"></ion-textarea>
+                      </ion-row>
+                      <h5 style="padding:10px;padding-top: 15px;background-color: #F5F5F5;margin: 0;color:black" >SERVICE LOCATION</h5>
+
+                      <ion-grid text-wrap>
+                          <ion-row>
+                              <ion-col col-4>
+                                  <ion-icon name="home" style="font-size: 20px;color:black">&nbsp;Address</ion-icon>
+                              </ion-col>
+                              <ion-col text-right col-8>
+                                  <ion-label style="float: right;margin-right: 2%;color:black"> {{nonschdetails.street1}}, {{nonschdetails.street2}} </ion-label>
+                              </ion-col>
+                          </ion-row>
+                          <ion-row>
+                              <ion-col col-4>
+                                  <ion-icon name="podium" style="font-size: 20px;color:black">&nbsp;City</ion-icon>
+                              </ion-col>
+                              <ion-col text-right col-8>
+                                  <ion-label style="float: right;margin-right: 2%;color:black"> {{nonschdetails.city}} </ion-label>
+                              </ion-col>
+                          </ion-row>
+                          <ion-row>
+                              <ion-col col-4>
+                                  <ion-icon ios="ios-globe-outline" md="md-globe"  style="font-size: 20px;color:black">&nbsp;State</ion-icon>
+                              </ion-col>
+                              <ion-col text-right col-8>
+                                  <ion-label style="float: right;margin-right: 2%;color:black">{{nonschdetails.state}} </ion-label>
+                              </ion-col>
+                          </ion-row>
+                          <ion-row>
+                              <ion-col col-4>
+                                  <ion-icon name="pin" style="font-size: 20px;color:black">&nbsp;Zip</ion-icon>
+                              </ion-col>
+                              <ion-col text-right col-8>
+                                  <ion-label style="float: right;margin-right: 2%;color:black">{{nonschdetails.zipCode}} </ion-label>
+                              </ion-col>
+                          </ion-row>
+                      </ion-grid>
+
+                        </div>
+                      </div>
+                      
+                    </div>
+
+      </ion-row> -->
+   
+      </div>
+      <!-- <div>
+          <h4 style="margin-left: 3%">I didn't provide care</h4> </div> -->
+
+ 
+  
+ 
+<!-- 
+       <div>
+                          <button ion-button color="red" [disabled]="buttonState()" style="position:fixed;">button</button>
+                          </div> -->
+  </div>
+
+
+<div *ngIf="isEdit==true" style="background-color: #F5F5F5">
+      <div>
+              <br>
+              <ion-card style="padding: 5px">
+                <ion-list>
+                   
+                
+                   <ion-item>
+                    <ion-label style="font-size: 16px" stacked>Time In</ion-label>
+                    <ion-datetime displayFormat="hh:mm A" [(ngModel)]="nonschdetails.tcstdt">{{nonschdetails.tcstdt}}</ion-datetime>
+                  </ion-item>
+            
+                  <ion-item>
+                    <ion-label style="font-size: 16px" stacked>Time Out</ion-label>
+                    <ion-datetime displayFormat="hh:mm A" [(ngModel)]="nonschdetails.tceddt">{{nonschdetails.tceddt}}</ion-datetime>
+            
+                  </ion-item>
+            
+                </ion-list>
+                
+                <div text-center>
+                  <button ion-button id="btn" (click)="save1(nonschdetails)" style="background-color:rgb(0, 153, 255) ">Save</button>
+                  <button ion-button id="btn" (click)="canceleditTC()" style="background-color:red ">Cancel</button>
+                </div>
+              </ion-card>
+            </div>
+      </div>
+
+      
+   
+  </ion-content>
+  <ion-footer style="padding: 5px">
+  
+    <p style="color: grey">If this is correct, please sign and submit your timesheet. Remember, it is a federal crime to submit a fraudalent timesheet.</p>
+  
+    <button ion-button color="primary" style="text-transform: none" (click)="submit(nonschdetails)" block>Verify Visit</button>
+  
+  
+  
+  
+  
+  </ion-footer>

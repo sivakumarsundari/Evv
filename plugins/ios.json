@@ -1,0 +1,58 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-hot-code-push-plugin": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    },
+    "cordova-plugin-local-notification": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    },
+    "phonegap-plugin-push": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    },
+    "cordova-plugin-request-location-accuracy": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-badge": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    },
+    "cordova-support-google-services": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    },
+    "phonegap-plugin-multidex": {
+      "PACKAGE_NAME": "com.evvinterface.testapp"
+    }
+  }
+}

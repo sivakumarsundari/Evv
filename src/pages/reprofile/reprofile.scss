@@ -1,0 +1,123 @@
+page-reprofile {
+    .img{
+        height: 100px;
+        width: 100px;
+        border-radius:50%;
+    }
+    .toolbar-title-ios {
+        padding: 0;
+        margin-left: 0px;
+        
+    }
+    #camera {
+      background-color: rgb(0, 153, 255);
+      position: relative;
+      top: -10px;
+      left:-35px;
+      border-radius: 100%;
+      font-size: 10px;
+      padding: 8px;
+  }
+    .toolbar-title {
+     
+        overflow: visible;
+      }
+    //   .label-ios,.label-md {
+    //     margin:0;
+    //     padding: -6px;
+    // }
+    .ion-md-locate:before {
+      content: "\f31c";
+      // margin: 0;
+      // left: -5px;
+      color:  rgb(0, 153, 255);
+    }
+    .label-md[stacked] {
+        font-size: 1.6rem;
+        padding: 0;
+      }
+      .item-md {
+         padding-left: 0; 
+        padding-right: 0;
+        /* position: relative; */
+        font-size: 1.6rem;
+        /* font-weight: normal; */
+        /* text-transform: none; */
+        /* color: #000; */
+         background-color: #fff;
+        -webkit-box-shadow: none;
+          box-shadow: none; 
+        -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    [col-2] {
+        padding: 10px;
+    } 
+    [col-10] {
+      padding: 1px;
+  }    
+//     .label-md[stacked] {
+//         font-size: 1.8rem;
+//       }
+//       .item-label-stacked .text-input-md,
+// .item-label-floating .text-input-md {
+//   margin-left: 2px; 
+
+// }
+// .text-input-md {
+//     margin: 10px 8px;
+//     padding: 0;
+//     width: calc(100% - 8px - 8px);
+//   }
+  
+
+// .item-label-stacked .select-md,
+// .item-label-floating .select-md {
+//   padding-left: 0;
+//   padding-top: 8px;
+//   padding-bottom: 8px;
+// }
+
+// }
+
+//  table { 
+//     width: 100%; 
+//     border-collapse: collapse; 
+//   }
+//   /* Zebra striping */
+//   tr:nth-of-type(odd) { 
+//     // background:#F5F5F5 ; 
+//   }
+//   th { 
+//      background:#337395; 
+//     color:white; 
+//     font-size:19px;
+//   }
+//   td, th { 
+//     padding: 15px; 
+//    //border: 1px solid #ccc; 
+//     text-align:center;
+//   }
+//   th, td {
+//     padding: 10px;
+//     text-align:center;
+//     border-bottom: 2px solid #ddd;
+//     font-size: 16px;
+// }
+.ion-md-locate:before {
+  color: rgb(0, 153, 255);
+  font-size: 25px;
+  }
+  .item-md {
+      padding-left: 0;
+  }
+  #badge_camera {
+      background-color: rgb(0, 153, 255);
+      position: relative;
+      top: -10px;
+      left:-35px;
+      border-radius: 100%;
+      font-size: 10px;
+      padding: 8px;
+  }
+}

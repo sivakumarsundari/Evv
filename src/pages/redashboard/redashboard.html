@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar color="primary"  style="padding: 0">
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col>
+          <ion-icon name="contact" style="font-size: 30px;color: white;float: left;" (click)="profile()" ></ion-icon>
+        </ion-col>
+        <ion-col style="position: unset;">
+          <ion-title text-center>Dashboard</ion-title>
+        </ion-col>
+        <ion-col>
+            <button ion-button clear style="float: right" (click)="presentPopover($event)">
+                <ion-icon name="menu" style="color: white;font-size: 25px"></ion-icon>
+              </button>
+          <!-- <ion-icon name="menu" style="font-size: 30px;color: white;float: right;" (click)="carehistory()"></ion-icon> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background-color: #F5F5F5"> 
+  <ion-card class="card" *ngFor="let det of missedsheet;let i=index"  style="margin: 10px;padding: 10px;padding-bottom: 0; width: calc(100% - 20px);" (click)="approve(det,i)">
+    <!-- <ion-card-content> -->
+           <ion-row align-items-start >
+               <ion-col col-1>
+                 <div>
+                   <ion-badge id="missing" class="test" color="danger" >!</ion-badge>
+                 </div>
+               </ion-col>
+               <ion-col col-11>
+                 <h2><b>Unapproved Visits</b></h2>
+                 <p>For {{det.tcDate| date:'fullDate'}}.</p>
+                 <!-- <p>It's look like you haven't submitted timesheet from {{det.tcDate | date: 'd/M/yy'}}</p> -->
+                 <button ion-button style="color:primary;text-transform: none;padding-left: 0px;" clear >Complete it Now</button>
+               </ion-col>
+             </ion-row>
+       <!-- </ion-card-content> -->
+     </ion-card>
+
+  <div text-center>
+      <h2 style="margin: 10px;padding-top: 3%"  *ngIf="global.name != null">Hello, {{global.name|uppercase}}</h2>
+      <p style="margin-top:0; font-style: italic;color: #4DB6AC ">Upcoming Appointments</p>
+    </div>
+
+    <ion-card *ngFor="let sch of schedulelist" style="margin: 5px;padding: 10px;">
+      <ion-item  style="padding: 1px;margin: 0;"  (click)="viewcaregiverappoinment(sch)">
+        <ion-avatar item-start *ngIf="sch.employeePhoto!=null;">
+          <img class="img" [src]="_DomSanitizer.bypassSecurityTrustUrl(sch.employeePhoto)" >
+          <!-- {{i.clientPhoto}} -->
+        </ion-avatar>
+        <ion-avatar item-start *ngIf="sch.employeePhoto==null&&sch.isMale==true;">
+          <img class="img" src="assets/imgs/male.png">
+          <!-- {{i.clientPhoto}} -->
+        </ion-avatar>
+        <ion-avatar item-start *ngIf="sch.employeePhoto==null&&sch.isMale!=true;">
+          <img class="img" src="assets/imgs/female.png">
+          <!-- {{i.clientPhoto}} -->
+        </ion-avatar>
+        <!-- <ion-avatar item-start>
+          <img style="border:1px solid rgb(206, 52, 10)" src={{sch.employeePhoto}}>
+        </ion-avatar> -->
+        <!-- <ion-icon name="ios-clock-outline"></ion-icon> -->
+        <h2 style="font-weight: 500">{{sch.scheduleDT |date: 'd/M'}} {{sch.employeeName|uppercase }} </h2>
+        <p *ngIf="!sch.isStarted || sch.isCompleted"><i>{{sch.scheduleDT |date: 'h:mm a'}} - {{sch.schenddt |date: 'h:mm a'}}</i></p>
+        <p *ngIf="sch.isStarted && !sch.isCompleted && !sch.isCancelled" style="color:#2979ff;font-size: 15px;"><i><ion-icon name="code-working" style="color:#2979ff;font-size: 15px;"></ion-icon> In progress</i></p>
+        <ion-icon *ngIf="sch.isCancelled" style="color:red;" name="close-circle"> Schedule Cancelled</ion-icon>
+   
+        <!-- *ngIf="sch.isCompleted && sch.istimesubmitclient && !sch.istimesubmitemp " -->
+      </ion-item>
+      <button ion-button full style="text-align: center;font-size: 12px;" *ngIf="sch.isCompleted && !sch.istimesubmitclient && sch.istimesubmitemp" (click)="approvetc(sch)" >Approve Timesheet</button>
+     
+    </ion-card>
+     <div class="alert" *ngIf="schedulelist.length==0">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>No Schedules are available Today!</strong>
+  </div>
+ 
+</ion-content>

@@ -1,0 +1,18 @@
+<ion-header text-center>
+  <ion-navbar color="primary">
+    <ion-title style="padding-right:10%">Personalize</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding text-center *ngFor="let i of records">
+
+  <h1  style="padding-top:20px;">Welcome,{{i.cgname}}!</h1>
+  <p>
+    Please take a minute to personalize your profile as a way to introduce yourself to your care recipients.
+  </p>
+  <br><br><br>
+        
+  <button ion-button large style="text-transform: none" block (click)="personalize()">Personalize Profile</button>
+  <button ion-button  clear style="text-transform: none;" block (click)="remind()" >Remind me later</button>
+
+</ion-content>

@@ -1,0 +1,31 @@
+<ion-header text-center>
+  <ion-navbar color="primary" style="padding: 0">
+    <ion-title style="padding-right: 10%">{{Monthname}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content  style="background-color:#EEEEEE;padding-top: 2%">
+
+    <ion-card style="margin: 5px;padding: 10px;padding-top: 5%" *ngFor="let i of daylist" (click)="details()">
+      <ion-grid style="padding: 0px;">
+        <ion-row>
+          <ion-col col-9>
+            <h2  style="font-weight: 500">{{i.scheduleDT | date:'MMMM dd'}}:{{i.employeeName}}</h2>
+            <p style="color: grey" *ngIf="!i.isMissingTimeSheet">{{i.totalEntry}} of {{i.verifiedEntry}} Entries Verified</p>
+           <ion-icon name="information-circle" style="color: red;padding-top: 2%" *ngIf="i.isMissingTimeSheet"> Timesheet not submitted </ion-icon>
+          </ion-col>
+          <ion-col col-3 text-right>
+            <ion-item>
+              <ion-range [(ngModel)]="i.sliderValue">
+
+              </ion-range>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <div class="alert" *ngIf="daylist.length==0">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>No timesheet are available for this month!</strong>
+    </div>
+</ion-content>

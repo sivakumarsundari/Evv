@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "786399803673",
+    "firebase_url": "https://evvios-22a8f.firebaseio.com",
+    "project_id": "evvios-22a8f",
+    "storage_bucket": "evvios-22a8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786399803673:android:82c86be4871aded8",
+        "android_client_info": {
+          "package_name": "com.sbna.evv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786399803673-hd16pichb6mlv1b371p3bcj6lce0l4ub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrYeKgPr3ikSoSWN0dcLX67N247ekMuj4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,40 @@
+<ion-header text-center>
+    <ion-navbar color="primary"  >
+      
+            <ion-title style="padding-right:50px">Schedule</ion-title></ion-navbar></ion-header>
+         
+  <ion-content style="background-color: rgb(231, 226, 226)">
+  
+    <h2 text-center>Hello,{{global.name|uppercase}}</h2>
+    <p text-center style="margin-top: 0">Upcoming Appointments</p>
+  
+    
+    <ion-card class="card" *ngFor="let i of schedulelist" style="margin: 5px;padding: 10px;padding-bottom: 0;">
+      <!-- <ion-item text-wrap *ngFor="let i of displaydata" (click)="viewapp(i)"> -->
+      <ion-item  style="padding: 0">
+        <ion-avatar item-start *ngIf="i.isMale==true;">
+          <img class="img" src="assets/imgs/man.png">
+          <!-- {{i.clientPhoto}} -->
+        </ion-avatar>
+        <ion-avatar item-start *ngIf="!i.isMale==true;">
+          <img class="img" src="assets/imgs/female.png">
+          <!-- {{i.clientPhoto}} -->
+        </ion-avatar>
+        <h2 style="font-weight: 500">{{i.clientName| uppercase }}</h2>
+        <p *ngIf="!i.isCancelled">{{i.sdt|  date:'shortDate'}} </p>
+        <p *ngIf="!i.isCancelled">{{i.sdt| date:'h:mm a'}} - {{i.edt| date:'h:mm a'}}</p>
+        <ion-icon style="color:red;font-size: 18px" name="close-circle" *ngIf="i.isCancelled"> Schedule Cancelled</ion-icon>
+        <div  *ngIf="!i.isCancelled">
+          <div>
+            <ion-fab style="padding-left: 70%;" >
+              <button ion-fab style="margin:-45px;background-color: rgb(48, 230, 139); border: 2px solid white;"  (click)="cancelapp(i)"> <!--presentAlert(i);-->
+                <ion-icon style="font-size:16px;">Cancel</ion-icon>
+              </button></ion-fab></div></div>
+     
+      </ion-item></ion-card>
+  <div class="alert" *ngIf="schedulelist.length==0">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>No Apppointments are available Today!</strong>
+  </div>
+    
+  </ion-content>

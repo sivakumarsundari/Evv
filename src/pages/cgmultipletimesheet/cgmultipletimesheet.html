@@ -1,0 +1,391 @@
+<ion-header>
+    <ion-toolbar color="primary" style="padding: 0">
+        <ion-grid>
+            <ion-row align-items-center>
+                <ion-col col-2 style="padding: 0">
+                    <button ion-button clear style="text-transform: none;color: white;padding: 0;margin-left: 5px " (click)="cancel()">Cancel</button>
+                </ion-col>
+                <ion-col col-10 text-center>
+                    <ion-title text-center style="padding-right:23%">Complete Visit</ion-title>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content style="background-color: #F5F5F5">
+        <div *ngIf="multiplelist!=null">
+                <div *ngIf="isedit==false">
+                        <ion-grid style="padding-top: 15px" >
+                                <ion-row text-center >
+                                    <ion-col col-12 >
+                                       
+                                          <div item-start >
+                                            <img  class="imgs" src="assets/imgs/male.png">
+                                            <!-- {{i.clientPhoto}} -->
+                                          </div></ion-col></ion-row>
+                                          <h6 style="margin: 10px;margin-bottom: 0;" text-center>PROVIDED BY</h6>
+                                          <p style="margin-top:0;color: gray" text-center><i>{{global.name|uppercase}}</i></p></ion-grid>
+                <!-- <ion-item no-lines>
+                        <ion-avatar item-start>
+                          <img class="img" src="assets/imgs/male.png">
+                        </ion-avatar>
+                        <p>PROVIDED BY</p>
+                        <h2>{{global.name|uppercase}}</h2>
+                      </ion-item> -->
+                    
+
+
+                <div *ngFor="let mtc of multiplelist;let i=index;" >
+                    <!-- <div [ngStyle]="{'background-color':mtc.ismissedforgettc==true? 'red':'#488aff'}">  -->
+               
+           
+           
+                  
+   
+       
+        
+                       <div style="padding-top: 5%">
+                                                               <ion-item no-lines style="background-color: white;">
+                                              <ion-avatar item-start *ngIf="mtc.clientPhoto!=null;">
+                                                <img class="img" [src]="_DomSanitizer.bypassSecurityTrustUrl(mtc.clientPhoto)" >
+                                                <!-- {{i.clientPhoto}} -->
+                                              </ion-avatar>
+                                              <ion-avatar item-start *ngIf="mtc.clientPhoto==null&&mtc.isMale==true;">
+                                                <img class="img" src="assets/imgs/male.png">
+                                                <!-- {{i.clientPhoto}} -->
+                                              </ion-avatar>
+                                              <ion-avatar item-start *ngIf="mtc.clientPhoto==null&&mtc.isMale!=true;">
+                                                <img class="img" src="assets/imgs/female.png">
+                                                <!-- {{i.clientPhoto}} -->
+                                              </ion-avatar>
+                                            
+                                              <p>RECIPIENT OF CARE</p>
+                                              <h2>{{mtc.clientName|uppercase}}</h2></ion-item>
+                                      
+                                            
+                                       
+                                <ion-item no-lines style="background-color: white;">
+                                    <ion-avatar item-start >
+                                        <div class="circle" >
+                                            <div class="letter">{{mtc.agencyname}}</div>
+                                          </div> </ion-avatar>
+                                          <p>{{mtc.agencyname}}</p>
+                                    <h2>{{mtc.agencyno}}</h2></ion-item>                      
+                                  
+                                    <ion-item  no-lines style="padding: 3%">
+                                            <ion-label>Do you want to submit this timesheet?</ion-label>
+                                            <ion-checkbox [(ngModel)]="mtc.istimecatrdtosub" style="margin: 3px 25px 3px 4px"></ion-checkbox>
+                                          </ion-item>          
+                      </div>
+                   
+                     
+                    
+        <ion-row align-items-center style="background-color: white;">
+            <ion-col style="padding: 0">
+              <p style="  color:gray;  margin-bottom: -3px;margin-left: 8px;font-size: 15px">DATE OF SERVICE</p>
+              <h4 style="margin-left: 5px;font-size: 18px">{{mtc.date | date :'MMMM d, y '}}</h4>
+            </ion-col>
+            <ion-col style="padding: 0">
+                    <!-- (click)="edit(tcdetails)" (click)="presentConfirm(tcdetails)"-->
+                    <ion-icon name="create" style="float: right;margin-right: 10px;"  color="primary" (click)="edit(mtc,i)" >&nbsp;&nbsp;Edit</ion-icon>
+            </ion-col>
+          </ion-row>
+          <div *ngIf="!mtc.ididntprovided  || mtc.ididntprovided=='false'"> 
+        <ion-grid style="background-color: white;">
+            <ion-row>
+                <ion-col col-4 *ngIf="newtime==false">
+                    <p style="color:gray; margin-bottom: -3px;font-size: 18px">Time in</p>
+                    <h4 style="font-size: 18px"> {{mtc.tcstdt| date : 'hh:mm a '}}</h4>
+                </ion-col>
+                <ion-col col-4 *ngIf="newtime==true">
+                    <p style="color:gray; margin-bottom: -3px;font-size: 18px">Time in</p>
+                    <h4 style="font-size: 18px"> {{newIntime| date : 'hh:mm a '}}</h4>
+                </ion-col>
+                <ion-col col-4 *ngIf="newtime==false">
+                        <p style="color:gray ;margin-bottom: -3px;font-size: 18px">Time out </p>
+                        <h4 style="font-size: 18px">{{mtc.tceddt| date :'hh:mm a '}}</h4>
+                </ion-col>
+                <ion-col col-4 *ngIf="newtime==true">
+                    <p style="color:gray ;margin-bottom: -3px;font-size: 18px">Time out </p>
+                    <h4 style="font-size: 18px">{{newOutTime| date :'hh:mm a '}}</h4>
+            </ion-col>
+                <ion-col col-4>
+                        <p style="color:gray; margin-bottom: -3px;font-size: 18px">Total Time</p>
+                        <h4 style="font-size: 18px">{{mtc.duration}} Minutes</h4>
+                    </ion-col>
+            </ion-row>
+           
+        </ion-grid>
+        
+
+
+        <h5 style="padding:10px;padding-top: 15px;background-color: white;margin: 0;color: gray" >ACTIVITIES</h5>
+       
+
+        <ion-grid style="padding: 0;background-color: white;">
+               
+        <ion-list no-lines style="margin: 0" *ngFor="let jobdet of mtc.jobTaskdet">
+                <ion-item>
+                   <ion-label>{{jobdet.taskName}}</ion-label>
+                    <ion-checkbox [(ngModel)]="jobdet.isCompleted" id="myCheckbox" click="nction()"></ion-checkbox>
+            </ion-item></ion-list>
+       </ion-grid>
+               <ion-row style="padding-bottom: 10px;padding-top: 10px;background-color: white;" >
+
+                <div class="half">
+  
+                        <div class="tab" *ngIf="multiplelist!=null">
+                            <input id="{{i}}" type="checkbox" name="tabs">
+                          <label for="{{i}}">Service Detail&nbsp;&nbsp;- &nbsp;&nbsp;{{mtc.date | date :'MMMM d'}}</label>
+                          <div class="tab-content">
+                            <ion-grid>
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-label style="color:black">Service type </ion-label>
+                                    </ion-col>
+                                    <ion-col  *ngIf="mtc.jobTaskdet != null">
+                                        <ion-label style="color:grey;float: right;margin-right: 2%">{{mtc.jobTaskdet[0].jobName}}</ion-label>
+                                    </ion-col> 
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-label style="color:black">Ratio(Provider:Recipient) </ion-label>
+                                    </ion-col>
+                                    <ion-col>
+                                        <ion-label style="color:grey;float:right;margin-right:2%">1:{{mtc.rserviceratio}}</ion-label>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                    
+                            <h5 style="padding:10px;padding-top: 15px;background-color: #F5F5F5;margin: 0;color:black" >NOTES</h5>
+                        <ion-row style=" background-color:#E3F2FD;color:black">
+                                <ion-textarea [(ngModel)]="mtc.notes" class="note" placeholder="Enter notes"></ion-textarea>
+                        </ion-row>
+                        <h5 style="padding:10px;padding-top: 15px;background-color: #F5F5F5;margin: 0;color:black" >SERVICE LOCATION</h5>
+
+                        <ion-grid text-wrap>
+                            <ion-row>
+                                <ion-col col-4>
+                                    <ion-icon name="home" style="font-size: 20px;color:black">&nbsp;Address</ion-icon>
+                                </ion-col>
+                                <ion-col text-right col-8>
+                                    <ion-label style="float: right;margin-right: 2%;color:black"> {{mtc.street1}}, {{mtc.street2}} </ion-label>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-4>
+                                    <ion-icon name="podium" style="font-size: 20px;color:black">&nbsp;City</ion-icon>
+                                </ion-col>
+                                <ion-col text-right col-8>
+                                    <ion-label style="float: right;margin-right: 2%;color:black"> {{mtc.city}} </ion-label>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-4>
+                                    <ion-icon ios="ios-globe-outline" md="md-globe"  style="font-size: 20px;color:black">&nbsp;State</ion-icon>
+                                </ion-col>
+                                <ion-col text-right col-8>
+                                    <ion-label style="float: right;margin-right: 2%;color:black">{{mtc.state}} </ion-label>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-4>
+                                    <ion-icon name="pin" style="font-size: 20px;color:black">&nbsp;Zip</ion-icon>
+                                </ion-col>
+                                <ion-col text-right col-8>
+                                    <ion-label style="float: right;margin-right: 2%;color:black">{{mtc.zipCode}} </ion-label>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+
+                          </div>
+                        </div>
+                        
+                      </div>
+
+        </ion-row>
+     
+        </div>
+      <!-- <p> sdasfd {{mtc.ididntprovided}}</p>  {{mtc.ididntprovided}} -->
+        <div *ngIf="mtc.ididntprovided=='true'">
+            <h4 style="margin-left: 3%">I didn't provide care</h4> </div>
+
+   
+    
+   
+<!-- 
+         <div>
+                            <button ion-button color="red" [disabled]="buttonState()" style="position:fixed;">button</button>
+                            </div> -->
+    </div></div>
+
+
+<div *ngIf="isedit==true" style="background-color: #F5F5F5">
+        <div>
+                <br>
+                <ion-card style="padding: 5px">
+                  <ion-list>
+                        <ion-item no-lines style="margin-left: 0.25%;margin-right: 0.25%;padding: 10px">
+                                <ion-avatar item-start *ngIf="singleuser.isMale==true;">
+                                        <img class="img" src="assets/imgs/man.png" >
+                                        <!-- {{i.clientPhoto}} -->
+                                      </ion-avatar>
+                                  <ion-avatar item-start *ngIf="!singleuser.isMale==true;">
+                                    <img class="img" src="assets/imgs/female.png" >
+                                    <!-- {{i.clientPhoto}} -->
+                                  </ion-avatar>
+                            <p>RECIPIENT OF CARE</p>
+                            <h2>{{singleuser.clientName|uppercase}}</h2>
+                        </ion-item>
+                        <p center text-center>DATE OF SERVICE</p>
+                      
+                        <h2 center text-center>{{singleuser.date | date :'MMMM d, y '}}</h2>
+
+
+
+                        <!-- <ion-item no-lines style="padding-top: 5%" > -->
+
+                            
+                           <ion-list no-lines style="padding-top: 5%" radio-group [(ngModel)]="singleuser.ididntprovided" *ngIf="singleuser.ismissedforgettc">
+                            <ion-item>
+                                <ion-label >I provided care</ion-label>
+                                <ion-radio value="false"></ion-radio>
+                              </ion-item>
+                              <ion-item>
+                                <ion-label>I didn't provide care</ion-label>
+                                <ion-radio value="true" ></ion-radio>
+                              </ion-item>
+                            </ion-list> 
+
+                                     
+                               
+                                   
+                                              
+                        <!-- <div class="container" >
+                   
+                               
+                                <div class="radio">
+                                        
+                                  <input id="radio-1"  class="formcontrol" name="radio"  value = "false"  [(ngModel)]="singleuser.ididntprovided"  type="radio"   >
+                                  <label for="radio-1"  class="radio-label"  >I provided care</label>
+                                </div>
+                              
+                                <div class="radio">
+                                  <input id="radio-2"  class="formcontrol" name="radio"  value = "true" [(ngModel)]="singleuser.ididntprovided" type="radio">
+                                  <label  for="radio-2"  class="radio-label">I didn't provide care</label>
+                                </div>
+                              
+                               
+                              </div> -->
+                            <!-- </ion-item> -->
+                              
+                 
+                     <ion-item>
+                      <ion-label style="font-size: 16px" stacked>Time In</ion-label>
+                      <!-- (ionChange) ="timeIn(singleuser.tcstdt)" -->
+                      <ion-datetime displayFormat="hh:mm A" [(ngModel)]="singleuser.tcstdt" >{{singleuser.tcstdt}}</ion-datetime>
+                    </ion-item>
+              
+                    <ion-item>
+                      <ion-label style="font-size: 16px" stacked>Time Out</ion-label>
+                      <ion-datetime displayFormat="hh:mm A" [(ngModel)]="singleuser.tceddt" >{{singleuser.tceddt}}</ion-datetime>
+              
+                    </ion-item>
+              
+                  </ion-list>
+                  <h5 style="padding:10px;padding-top: 15px;background-color: #F5F5F5;margin: 0" >ACTIVITIES</h5>
+       
+
+                  <ion-grid style="padding: 0">
+                         
+                  <ion-list no-lines style="margin: 0" *ngFor="let job of singleuser.jobTaskdet">
+                          <ion-item>
+                             <ion-label>{{job.taskName}}</ion-label>
+                              <ion-checkbox [(ngModel)]="job.isCompleted" id="myCheckbox" click="nction()"></ion-checkbox>
+                      </ion-item></ion-list>
+                 </ion-grid>
+                 <h5 style="padding:10px;padding-top: 15px;background-color: #F5F5F5;margin: 0"  >Service Detail</h5>
+                <ion-grid>
+                       <ion-row>
+                           <ion-col>
+                               <ion-label style="color:black">Service type </ion-label>
+                           </ion-col>
+                           <ion-col  *ngIf="singleuser.jobTaskdet != null">
+                               <ion-label style="color:grey;float: right;margin-right: 2%">{{singleuser.jobTaskdet[0].jobName}}</ion-label>
+                           </ion-col> 
+                       </ion-row>
+                       <ion-row>
+                           <ion-col>
+                               <ion-label style="color:black">Ratio(Provider:Recipient) </ion-label>
+                           </ion-col>
+                           <ion-col>
+                               <ion-label style="color:grey;float:right;margin-right:2%">1:{{singleuser.rserviceratio}}</ion-label>
+                           </ion-col>
+                       </ion-row>
+                   </ion-grid>
+           
+                   <h5 style="padding:10px;padding-top: 15px;background-color: #F5F5F5;margin: 0;color:black;" >NOTES</h5>
+               <ion-row style=" background-color:#E3F2FD;">
+                       <ion-textarea [(ngModel)]="singleuser.notes" class="note" placeholder="Enter notes"></ion-textarea>
+               </ion-row>
+               <h5 style="padding-top: 15px;background-color: #F5F5F5;margin: 0;color:black" >SERVICE LOCATION</h5>
+
+               <ion-grid text-wrap>
+                   <ion-row>
+                       <ion-col col-4>
+                           <ion-icon name="home" style="font-size: 20px;color:black">&nbsp;Address</ion-icon>
+                       </ion-col>
+                       <ion-col text-right col-8>
+                           <ion-label style="float: right;margin-right: 2%;color:black"> {{singleuser.street1}}, {{singleuser.street2}} </ion-label>
+                       </ion-col>
+                   </ion-row>
+                   <ion-row>
+                       <ion-col col-4>
+                           <ion-icon name="podium" style="font-size: 20px;color:black">&nbsp;City</ion-icon>
+                       </ion-col>
+                       <ion-col text-right col-8>
+                           <ion-label style="float: right;margin-right: 2%;color:black"> {{singleuser.city}} </ion-label>
+                       </ion-col>
+                   </ion-row>
+                   <ion-row>
+                       <ion-col col-4>
+                           <ion-icon ios="ios-globe-outline" md="md-globe"  style="font-size: 20px;color:black">&nbsp;State</ion-icon>
+                       </ion-col>
+                       <ion-col text-right col-8>
+                           <ion-label style="float: right;margin-right: 2%;color:black">{{singleuser.state}} </ion-label>
+                       </ion-col>
+                   </ion-row>
+                   <ion-row>
+                       <ion-col col-4>
+                           <ion-icon name="pin" style="font-size: 20px;color:black">&nbsp;Zip</ion-icon>
+                       </ion-col>
+                       <ion-col text-right col-8>
+                           <ion-label style="float: right;margin-right: 2%;color:black">{{singleuser.zipCode}} </ion-label>
+                       </ion-col>
+                   </ion-row>
+               </ion-grid>
+               <ion-row>
+                   <ion-col>
+                    <footer class="footer_behind">
+                        <button ion-button id="btn" (click)="savetcedit(singleuser)" style="background-color:rgb(0, 153, 255) ">Save</button>
+                        <button ion-button id="btn" (click)="canceleditTC()" style="background-color:red ">Cancel</button>
+                         </footer> 
+ 
+                   </ion-col>
+               </ion-row>
+              
+                </ion-card>
+              </div>
+        </div>
+  
+</div>
+
+</ion-content>
+<ion-footer style="padding: 5px" [hidden]="isedit">
+
+    <button ion-button color="primary"   id="myButton" style="text-transform: none" (click)="multiblesignaturepage(multiplelist)" block >Verify</button>
+    <!--[(disabled)]="!bath && !groom && !eat" -->
+</ion-footer>
